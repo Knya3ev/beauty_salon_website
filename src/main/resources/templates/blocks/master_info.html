@@ -1,0 +1,7 @@
+<div class="container col-10">
+    <h5 th:text="${data}"></h5>
+    <h5 th:text="${master.getPerson().getFirstName()} +' '+ ${master.getPerson().getLastName()}+' '+ ${master.getPerson().getNumberPhone()} "></h5>
+    <div th:each="days: ${masterData}">
+        <h5 th:text="${days}"></h5>
+    </div>
+</div>

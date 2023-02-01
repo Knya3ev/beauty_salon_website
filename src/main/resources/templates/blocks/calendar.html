@@ -1,0 +1,40 @@
+<div th:fragment="calendar">
+    <form th:action="@{/scheduling/checkbox/} + ${master.getId()}" th:object="${ch}" th:method="POST">
+        <div>
+            <h2 th:text="${nameMonth}"></h2>
+        </div>
+        <table class="table table-sm table-dark">
+            <thead>
+            <th scope="col">Пн</th>
+            <th scope="col">Вт</th>
+            <th scope="col">Ср</th>
+            <th scope="col">Чт</th>
+            <th scope="col">Пт</th>
+            <th scope="col">Сб</th>
+            <th scope="col">Вс</th>
+            </thead>
+            <tbody>
+            <tr th:each="el: ${list}">
+
+                <td th:each="data: ${el}">
+                    <div class="form-check" th:if="${data.isActuality()} and !${data.isDisabled()}">
+                        <input type="checkbox" class="form-check-input" th:if="${data.isActuality()}"
+                               th:field="*{checkedItems}" th:value="${data.getData()}" th:id="${data.getData()}">
+                        <label class="form-check-label" th:for="${data.getData()}" th:text="${data.getDay()}">-</label>
+                    </div>
+
+                    <div class="form-check" th:if="${data.isDisabled()} and ${data.isActuality()}">
+                        <input type="checkbox" class="form-check-input" th:id="${data.getData()}" checked disabled>
+                        <label class="form-check-label" th:for="${data.getData()}" th:text="${data.getDay()}">-</label>
+                    </div>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <button type="submit" class="btn btn-success">send</button>
+        </div>
+
+    </form>
+</div>
